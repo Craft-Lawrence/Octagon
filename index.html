@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+	<div id="app">
+		<div class="settings">
+			<div class="option">
+				<span>Перспектива</span>
+				<input type="number" v-model="perspective">
+				<input type="range" min="0" max="10000" step="100" v-model="perspective">
+			</div>
+			<div class="option">
+				<span>Ширина</span>
+				<input type="number" v-model="sideW">
+				<input type="range" min="0" max="200" step="10" v-model="sideW">
+			</div>
+			<div class="option">
+				<span>Высота</span>
+				<input type="number" v-model="sideH">
+				<input type="range" min="50" max="200" step="10" v-model="sideH">
+			</div>
+			<div class="option">
+				<span>Ось Х</span>
+				<input type="number" v-model="vX">
+				<input type="range" min="-180" max="180" step="1" v-model="vX">
+			</div>
+			<div class="option">
+				<span>Ось Y</span>
+				<input type="number" v-model="vY" :disabled="rotate">
+				<input type="range" min="-180" max="180" step="1" v-model="vY" :disabled="rotate">
+			</div>
+			<div class="option">
+				<span>Ось Z</span>
+				<input type="number" v-model="vZ">
+				<input type="range" min="-180" max="180" step="1" v-model="vZ">
+			</div>
+			<div class="option">
+				<span>Вращение Y</span>
+				<input type="checkbox" v-model="rotate" @change="checkRotate">
+			</div>
+			<div class="option">
+				<span>Скорость</span>
+				<input type="number" v-model="rotateSpeed" @change="checkRotate">
+				<input 
+					type="range" 
+					min="10" 
+					max="100" 
+					step="10" 
+					v-model="rotateSpeed" 
+					@input="rotate = true; checkRotate()"
+					@change="rotate = true; checkRotate()"
+				>
+			</div>
+		</div>
+
+		<div class="perspective" :style="{perspective: perspective+'px'}">
+			<div class="container" :style="containerStyle">
+				<div class="side N" :style="side90Style(0)">N</div>
+				<div class="side NE" :style="side90Style(1)">NE</div>
+				<div class="side E" :style="side90Style(2)">E</div>
+				<div class="side SE" :style="side90Style(3)">SE</div>
+				<div class="side S" :style="side90Style(4)">S</div>
+				<div class="side SW" :style="side90Style(5)">SW</div>
+				<div class="side W" :style="side90Style(6)">W</div>
+				<div class="side NW" :style="side90Style(7)">NW</div>
+			</div>
+		</div>
+		
+	</div>
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>
